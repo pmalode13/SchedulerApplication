@@ -1,0 +1,32 @@
+<div class="m-2 border mt-5">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">MeetingName</th>
+        <th scope="col">Organiser</th>
+        <th scope="col">Date</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">Roomname</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let details of meetingDetails">
+        <td>{{details.meetingName }}</td>
+        <td>{{details.organizerName }}</td>
+        <td>{{details.startTime | date:'dd-MM-yyyy'}}</td>
+        <td>{{details.startTime | date:'hh:mm'}}</td>
+        <td>{{details.endTime | date:'hh:mm'}}</td>
+        <td>{{details.roomName }}</td>
+        <td>
+          <button type="button" class="btn btn-outline-primary mr-2"
+            (click)="onEditClick(details.meetingId)">Edit</button>
+          <button type="button " class="btn btn-outline-info mr-2"
+            (click)="onDetailsClick(details.meetingId)">Details</button>
+          <button type="button " class="btn btn-outline-danger mr-2"
+            (click)="onDeleteClick(details.meetingId)">Delete</button>
+      </tr>
+    </tbody>
+  </table>
+</div>

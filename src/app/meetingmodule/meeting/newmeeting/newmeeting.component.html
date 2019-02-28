@@ -1,0 +1,86 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mt-5 mx-auto jumbotron">
+        <div class="card-body">
+          <h1 class="card-title text-center">New Meeting</h1>
+          <form name="form" (ngSubmit)="addNewMeetingForm.form.valid " #addNewMeetingForm="ngForm" novalidate>
+            <div class="form-group">
+              <label for="meetingName">Meeting Name</label>
+              <input type="text" class="form-control" [(ngModel)]="model.meetingNameLocal" #meetingNameLocal="ngModel"
+                [ngClass]="{'is-invalid':addNewMeetingForm.submitted && meetingNameLocal.invalid}" name="meetingName"
+                required />
+              <div *ngIf="addNewMeetingForm.submitted && meetingNameLocal.invalid" class="invalid-feedback">
+                <div *ngIf="meetingNameLocal.errors.required">Meeting Name is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="agenda">Agenda</label>
+              <textarea class="form-control" [(ngModel)]="model.agendaLocal" #agendaLocal="ngModel"
+                [ngClass]="{'is-invalid':addNewMeetingForm.submitted && agendaLocal.invalid}" name="agenda"
+                required></textarea>
+              <div *ngIf="addNewMeetingForm.submitted && agendaLocal.invalid" class="invalid-feedback">
+                <div *ngIf="agendaLocal.errors.required">Agenda is required</div>
+              </div>
+            </div>
+            <ng-multiselect-dropdown class=" my-2" [placeholder]="'Select Attendees'" [data]="dropdownList"
+              [(ngModel)]="selectedItems" [settings]="dropdownSettings" name="attendees">
+            </ng-multiselect-dropdown>
+
+
+
+            <div class="col-sm-6 mt-2">
+              <label for="dateOfMeeting">Date</label>
+              <input bsDatepicker name="dateOfMeeting" [(ngModel)]="model.dateOfMeetingLocal" (blur)="checkDate()"
+                     #dateOfMeetingLocal="ngModel" class="form-control"
+                     [ngClass]="{'is-invalid':addNewMeetingForm.submitted && dateOfMeetingLocal.invalid}" required>
+            </div>
+            <div *ngIf="addNewMeetingForm.submitted && dateOfMeetingLocal.invalid" class="invalid-feedback">
+              <div *ngIf="dateOfMeetingLocal.errors.required">Select Date</div>
+            </div>
+
+
+            <div class="form-group row mt-3">
+              <label for="subject" class="col-sm-2 col-form-label mt-4 ml-1">Time</label>
+              <div class="row ">
+                <div class="row ml-4">
+                  <timepicker [(ngModel)]="model.meetingStartTime" [disabled]="TimePicker" [showMeridian]="isMeridian"
+                              #meetingStartTime="ngModel" name="startTime" (click)="visibleAvailability()"></timepicker>
+                  <p class="mt-4 mx-4 ">To</p>
+                  <timepicker [(ngModel)]="model.meetingEndTime" [showMeridian]="isMeridian" [disabled]="TimePicker"
+                              (click)="visibleAvailability()" #meetingEndTime="ngModel" name="endTime"></timepicker>
+                </div>
+                <button class="btn btn-outline-info mt-2 ml-4" type="button" [disabled]="CheckAvailability" (click)="checkTime()">Check Availability</button>
+              </div>
+              <div class="text-danger ml-4" *ngIf="checkTimeValid">*Check Time please</div>
+              <div class="text-danger ml-4" *ngIf="SelectDateNotify">*Select Date please</div>
+            </div>
+
+            <div class="form-group row mt-3 ml-2">
+              <label for="availableRoom ml-5">Available Rooms</label>
+              <select class="hideLabel form-control col-11" required [(ngModel)]="model.availableRoomLocal"
+                [disabled]="roomlist"
+                [ngClass]="{'is-invalid':addNewMeetingForm.submitted && availableRoomLocal.invalid}"
+                name="availableRoom" #availableRoomLocal="ngModel">
+                <option selected="">Select Room</option>
+                <option *ngFor="let rooms of rooms" [value]="rooms.roomId">{{ rooms.roomName }}</option>
+              </select>
+              <div *ngIf="addNewMeetingForm.submitted && availableRoomLocal.invalid" class="invalid-feedback">
+                <div *ngIf="availableRoomLocal.errors.required">Select</div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-outline-primary" (click)="onAddNewMeetingClick()">Add
+                Meeting</button>
+              <button class="btn btn-outline-danger ml-2" type="button" (click)="onBackClick()">Back</button>
+              <button class="btn btn-outline-warning ml-2" type="button" (click)="onClearClick()">Clear</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,52 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mt-5 mx-auto jumbotron">
+        <div class="card-body">
+          <h1 class="card-title text-center">Meeting meetingDetails</h1>
+
+          <div class="mt-5">
+            <label><b>Meeting Name</b></label>
+            <p> {{ meetingDetails.meetingName }}</p>
+          </div>
+
+          <div>
+            <label><b>Agenda</b></label>
+            <p> {{ meetingDetails.agenda }}</p>
+          </div>
+
+          <div>
+            <label><b>Attendees</b></label>
+            <li *ngFor="let attendees of meetingDetails.meetingAttendeesName">
+              {{ attendees.attendeeName }}</li>
+          </div>
+
+          <div>
+            <label for="topicName"><b>Date</b></label>
+            <p> {{ meetingDetails.startTime | date:'yyyy-MM-dd' }}</p>
+          </div>
+
+          <div>
+            <label for="Time"><b>Time</b></label>
+            <div class="row">
+              <p class="ml-3">{{ meetingDetails.startTime | date:"hh:mm" }} To
+                {{ meetingDetails.endTime | date:"hh:mm" }}</p>
+            </div>
+          </div>
+
+          <div>
+            <label for="Time"><b>Room Name</b></label>
+            <div class="row">
+              <p class="ml-3"> {{ meetingDetails.roomName }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-danger" [routerLink]="'/meeting/meetingcomponent/list'">Back</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

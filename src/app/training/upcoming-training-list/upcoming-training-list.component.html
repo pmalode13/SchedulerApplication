@@ -1,0 +1,33 @@
+<div class="m-2 border mt-5">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Topic Name</th>
+        <th scope="col">Trainer Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">Room Name</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let details of trainingDetails">
+        <td>{{details.topic  }}</td>
+        <td>{{details.trainerName }}</td>
+        <td>{{details.startTime | date:"yyyy-MM-dd" }}</td>
+        <td>{{details.startTime |date:'HH:MM' }}</td>
+        <td>{{details.endTime |date:'HH:MM'  }}</td>
+        <td>{{details.roomName }}</td>
+
+        <td>
+          <button type="button" class="btn btn-outline-primary mr-2" (click)="onEditClick(details.trainingId)">Edit</button>
+          <button type="button " class="btn btn-outline-info mr-2" (click)="onDetailsClick(details.trainingId)">Details</button>
+          <button type="button " class="btn btn-outline-danger mr-2" (click)="onDeleteClick(details.trainingId)">Delete</button>
+          <button type="button " class="btn btn-outline-warning">RSVP</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

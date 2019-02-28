@@ -1,0 +1,89 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto jumbotron">
+        <div class="card-body">
+          <h3 class="card-title text-center">Register</h3>
+          <form name="form"
+                (ngSubmit)="registrationForm.form.valid && onRegisterClick()"
+                #registrationForm="ngForm"
+                novalidate>
+            <div class="form-group">
+              <label for="rfname">First Name</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="model.fname"
+                     #fname="ngModel"
+                     [ngClass]="{
+                  'is-invalid': registrationForm.submitted && fname.invalid
+                }"
+                     name="rfname"
+                     required />
+              <div *ngIf="registrationForm.submitted && fname.invalid"
+                   class="invalid-feedback">
+                <div *ngIf="fname.errors.required">First Name is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="rlname">Last Name</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="model.lname"
+                     #lname="ngModel"
+                     [ngClass]="{
+                  'is-invalid': registrationForm.submitted && lname.invalid
+                }"
+                     name="rlname"
+                     required />
+              <div *ngIf="registrationForm.submitted && lname.invalid"
+                   class="invalid-feedback">
+                <div *ngIf="lname.errors.required">Last Name is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="model.email"
+                     #email="ngModel"
+                     [ngClass]="{
+                  'is-invalid': registrationForm.submitted && email.invalid
+                }"
+                     name="email"
+                     required
+                     email />
+              <div *ngIf="registrationForm.submitted && email.invalid"
+                   class="invalid-feedback">
+                <div *ngIf="email.errors.required">Email Name is required</div>
+                <div *ngIf="email.errors.email">
+                  Email must be a valid email Address
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{'is-invalid':registrationForm.submitted && password.invalid}" name="password" required minlength="6" />
+              <div *ngIf="registrationForm.submitted && password.invalid" class="invalid-feedback">
+                <div *ngIf="password.errors.required">Password Name is required</div>
+                <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" class="form-control" [(ngModel)]="model.confPassword" #confPassword="ngModel" compare="password" [ngClass]="{'is-invalid':registrationForm.submitted && confPassword.invalid}" name="confirmPassword" required minlength="6" />
+              <div *ngIf="confPassword.invalid && (confPassword.dirty|| confPassword.touched)" class="invalid-feedback">
+                <div *ngIf="confPassword.errors.required">Password Name is required</div>
+                <div *ngIf="confPassword.errors.compare">Password not matching</div>
+              </div>
+            </div>
+        
+        <div class="form-group">
+          <button class="btn btn-primary" type="button">Register</button>
+          <button class="btn btn-danger ml-2" [routerLink]="'/auth/login'">Back</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>

@@ -1,0 +1,85 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mt-5 mx-auto jumbotron">
+        <div class="card-body">
+          <h1 class="card-title text-center">New Training</h1>
+
+          <form name="form" (ngSubmit)="addNewTrainingForm.form.valid && onAddNewTrainingClick()"
+            #addNewTrainingForm="ngForm" novalidate>
+
+            <div class="form-group">
+              <label for="topicName">Topic Name</label>
+              <input type="text" class="form-control" [(ngModel)]="model.topicNameLocal" #topicNameLocal="ngModel"
+                [ngClass]="{'is-invalid':addNewTrainingForm.submitted && topicNameLocal.invalid}" name="topicName"
+                required />
+              <div *ngIf="addNewTrainingForm.submitted && topicNameLocal.invalid" class="invalid-feedback">
+                <div *ngIf="topicNameLocal.errors.required">First Name is required</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="summary">Summary</label>
+              <textarea class="form-control" [(ngModel)]="model.summaryLocal" #summaryLocal="ngModel"
+                [ngClass]="{'is-invalid':addNewTrainingForm.submitted && summaryLocal.invalid}" name="summary"
+                required></textarea>
+              <div *ngIf="addNewTrainingForm.submitted && summaryLocal.invalid" class="invalid-feedback">
+                <div *ngIf="summaryLocal.errors.required">Last Name is required</div>
+              </div>
+            </div>
+
+            <div class="form-group row mt-3">
+              <label for="dateOfTraining" class="col-sm-2 col-form-label ml-1">Date</label>
+
+              <div class="col-sm-6">
+                <input bsDatepicker name="dateOfTraining" [(ngModel)]="model.dateOfTrainingLocal" (blur)="checkDate()"
+                  #dateOfTrainingLocal="ngModel" class="form-control"
+                  [ngClass]="{'is-invalid':addNewTrainingForm.submitted && dateOfTrainingLocal.invalid}" required>
+              </div>
+              <div *ngIf="addNewTrainingForm.submitted && dateOfTrainingLocal.invalid" class="invalid-feedback">
+                <div *ngIf="dateOfTrainingLocal.errors.required">Select Date</div>
+              </div>
+            </div>
+
+            <div class="form-group row mt-3">
+              <label for="subject" class="col-sm-2 col-form-label mt-4 ml-1">Time</label>
+              <div class="row ">
+                <div class="row ml-4">
+                  <timepicker [(ngModel)]="model.trainingStartTime" [disabled]="TimePicker" (click)="visibleAvailability()" [showMeridian]="isMeridian"
+                              #trainingStartTime="ngModel" name="startTime"></timepicker>
+                  <p class="mt-4 mx-4 ">To</p>
+                  <timepicker [(ngModel)]="model.trainingEndTime" [showMeridian]="isMeridian" (click)="visibleAvailability()" [disabled]="TimePicker"
+                              #trainingEndTime="ngModel" name="endTime"></timepicker>
+                  <button class="btn btn-outline-info mt-2" type="button" [disabled]="CheckAvailability" (click)="checkTime()">Check Availability</button>
+                </div>
+              </div>
+              <div class="text-danger ml-4" *ngIf="checkTimeValid">*Check Time please</div>
+              <div class="text-danger ml-4" *ngIf="SelectDateNotify">*Select Date please</div>
+            </div>
+
+            <div class="form-group row mt-3 ml-2">
+              <label for="availableRoom ml-5">Available Rooms</label>
+              <select class="hideLabel form-control col-11" required [(ngModel)]="model.availableRoomLocal"
+                [disabled]="roomlist"
+                [ngClass]="{'is-invalid':addNewTrainingForm.submitted && availableRoomLocal.invalid}"
+                name="availableRoom" #availableRoomLocal="ngModel">
+                <option selected="">Select Room</option>
+                <option *ngFor="let rooms of rooms" [value]="rooms.roomId">{{ rooms.roomName }}</option>
+              </select>
+              <div *ngIf="addNewTrainingForm.submitted && availableRoomLocal.invalid" class="invalid-feedback">
+                <div *ngIf="availableRoomLocal.errors.required">Select</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-outline-primary">Add Training</button>
+              <button class="btn btn-outline-danger ml-2" type="button" (click)="onBackClick()">Back</button>
+              <button class="btn btn-outline-warning ml-2" type="button" (click)="onClearClick()">Clear</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

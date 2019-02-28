@@ -1,0 +1,19 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\e2e",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\header",
+    "\\src\\app\\meetingmodule",
+    "\\src\\app\\meetingmodule\\meeting",
+    "\\src\\app\\meetingmodule\\meeting\\list",
+    "\\src\\app\\Models",
+    "\\src\\app\\training",
+    "\\src\\app\\training\\newtraining",
+    "\\src\\app\\training\\newtraining\\add-new-training-form",
+    "\\src\\app\\training\\upcoming-training-list"
+  ],
+  "SelectedNode": "\\src\\app\\training\\upcoming-training-list\\upcoming-training-list.component.html",
+  "PreviewInSolutionExplorer": false
+}

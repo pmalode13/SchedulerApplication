@@ -1,0 +1,47 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mt-5 mx-auto jumbotron">
+        <div class="card-body">
+          <h1 class="card-title text-center">Training trainingDetails</h1>
+
+          <div class="mt-5">
+            <label for="topicName"><b>Topic Name</b></label>
+            <p> {{trainingDetails.topic}}</p>
+
+          </div>
+
+          <div>
+            <label for="topicName"><b>Trainer Name</b></label>
+            <p> {{trainingDetails.trainerName}}</p>
+
+          </div>
+
+          <div>
+            <label for="topicName"><b>Date</b></label>
+            <p>{{trainingDetails.startTime | date:"yyyy-MM-dd"}}</p>
+          </div>
+
+          <div>
+            <label for="Time"><b>Time</b></label>
+            <div class="row">
+              <p class="ml-3"> {{ trainingDetails.startTime | date:"HH:MM" }} To {{trainingDetails.endTime | date:"HH:MM"}}</p>
+            </div>
+          </div>
+
+          <div>
+            <label for="Time"><b>Room Name</b></label>
+            <div class="row">
+              <p class="ml-3"> {{trainingDetails.roomName }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-danger" [routerLink]="'/training/upcomingTrainingList'">Back</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
